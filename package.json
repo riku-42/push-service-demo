@@ -1,0 +1,17 @@
+{
+  "name": "push-service-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "push_service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./push_server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "web-push": "^3.5.0"
+  }
+}
