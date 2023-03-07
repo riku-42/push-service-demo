@@ -1,10 +1,16 @@
 const express = require('express');
+const readline = require('readline');
 const webpush = require('web-push');
 const cors = require('cors');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 const publicVapidKey = 'BAOIJSdtGzpjmlqyY_lDLFE9aEb7vbYO5drL_H2xnXKvltR2JtDmUnIgLuKt6ui0bh4xz_1cROvWv3UULd1_-Ck';
 const privateVapidKey = 'N_w89gMxl92YnvjKoskovHloLVEYWfxsA_D6agpLwr0';
@@ -30,7 +36,7 @@ app.post('/push/register', (req, res) => {
 
 
 const sendMessage = () => {
-  console.log('sending message...');
+  console.log('Sending message...');
   subscriptions.forEach(subscription => {
     console.log(subscription);
     webpush
@@ -41,8 +47,11 @@ const sendMessage = () => {
   });
 };
 
-// Sending messages every 30 seconds
-setInterval(sendMessage, 30 * 1000);
+rl.on('line', (input) => {
+  if (input === 'send') {
+    sendMessage();
+  }
+});
 
 const port = 86;
 app.listen(port, () => {
